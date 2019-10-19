@@ -52,6 +52,9 @@
     <Compile Include="GetTotalProcessTimeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GetTotalFlowTimeTests.cs" />
+    <Compile Include="GetTiempoMedioFinalizacionTests.cs" />
+    <Compile Include="GetUtilizacionTests.cs" />
+    <Compile Include="GetNumeroMedioTrabajosSistemaTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

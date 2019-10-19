@@ -12,11 +12,11 @@ namespace PepinoLib
         /// <summary>
         /// Tiempo de realización (proceso) del trabajo.
         /// </summary>
-        public int ProcessTime { get; set; }
+        public float ProcessTime { get; set; }
         //public int FechaEntregaSolicitada { get; set; }
         ///// <summary>
-        ///// Retraso del trabajo.
-        ///// </summary>
-        //public int JobDelayTime { get; set; }
+        /// Retraso del trabajo.
+        /// </summary>
+        public float JobDelayTime { get; set; }
     }
 }

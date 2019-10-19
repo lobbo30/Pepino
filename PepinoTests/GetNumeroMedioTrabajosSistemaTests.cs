@@ -6,10 +6,10 @@ using PepinoLib;
 namespace PepinoTests
 {
     [TestClass]
-    public class GetTotalFlowTimeTests
+    public class GetNumeroMedioTrabajosSistemaTests
     {
         [TestMethod]
-        public void GetTotalFlowTime()
+        public void GetNumeroMedioTrabajosSistema()
         {
             List<Job> secuenciaTrabajos = new List<Job>()
             {
@@ -20,13 +20,13 @@ namespace PepinoTests
                 new Job() { Nombre = "E", ProcessTime = 9 }
             };
 
-            float resultado = JobTimeCalculator.GetTotalFlowTime(secuenciaTrabajos);
+            float resultado = JobTimeCalculator.GetNumeroMedioTrabajosSistema(secuenciaTrabajos);
 
-            Assert.AreEqual(77, resultado);
+            Assert.AreEqual(2.75f, resultado, 0.01f);
         }
 
         [TestMethod]
-        public void GetTotalFlowTime_WhenArgumentsAreDifferent()
+        public void GetNumeroMedioTrabajosSistema_WhenArgumentIsDifferent()
         {
             List<Job> secuenciaTrabajos = new List<Job>()
             {
@@ -37,18 +37,16 @@ namespace PepinoTests
                 new Job() { Nombre = "E", ProcessTime = 6 }
             };
 
-            float resultado = JobTimeCalculator.GetTotalFlowTime(secuenciaTrabajos);
+            float resultado = JobTimeCalculator.GetNumeroMedioTrabajosSistema(secuenciaTrabajos);
 
-            Assert.AreEqual(71, resultado);
+            Assert.AreEqual(2.63f, resultado, 0.01f);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void GetTotalFlowTime_WhenArgumentIsNull()
+        public void GetNumeroMedioTrabajosSistema_WhenArgumentIsNull()
         {
-            float resultado = JobTimeCalculator.GetTotalFlowTime(null);
+            float resultado = JobTimeCalculator.GetNumeroMedioTrabajosSistema(null);
         }
     }
-
-    
 }

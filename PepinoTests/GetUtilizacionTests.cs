@@ -6,10 +6,10 @@ using PepinoLib;
 namespace PepinoTests
 {
     [TestClass]
-    public class GetTotalFlowTimeTests
+    public class GetUtilizacionTests
     {
         [TestMethod]
-        public void GetTotalFlowTime()
+        public void GetUtilizacion()
         {
             List<Job> secuenciaTrabajos = new List<Job>()
             {
@@ -20,13 +20,13 @@ namespace PepinoTests
                 new Job() { Nombre = "E", ProcessTime = 9 }
             };
 
-            float resultado = JobTimeCalculator.GetTotalFlowTime(secuenciaTrabajos);
+            float resultado = JobTimeCalculator.GetUtilizacion(secuenciaTrabajos);
 
-            Assert.AreEqual(77, resultado);
+            Assert.AreEqual(0.364f, resultado, 0.001f);
         }
 
         [TestMethod]
-        public void GetTotalFlowTime_WhenArgumentsAreDifferent()
+        public void GetUtilizacion_WhenArgumentIsDifferent()
         {
             List<Job> secuenciaTrabajos = new List<Job>()
             {
@@ -37,18 +37,16 @@ namespace PepinoTests
                 new Job() { Nombre = "E", ProcessTime = 6 }
             };
 
-            float resultado = JobTimeCalculator.GetTotalFlowTime(secuenciaTrabajos);
+            float resultado = JobTimeCalculator.GetUtilizacion(secuenciaTrabajos);
 
-            Assert.AreEqual(71, resultado);
+            Assert.AreEqual(0.3802f, resultado, 0.0001f);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void GetTotalFlowTime_WhenArgumentIsNull()
+        public void GetUtilizacion_WhenArgumentIsNull()
         {
-            float resultado = JobTimeCalculator.GetTotalFlowTime(null);
+            float resultado = JobTimeCalculator.GetUtilizacion(null);
         }
     }
-
-    
 }

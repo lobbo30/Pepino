@@ -20,7 +20,7 @@ namespace PepinoTests
                 new Job() { Nombre = "E", ProcessTime = 9 }
             };
 
-            int resultado = JobTimeCalculator.GetTotalProcessTime(secuenciaTrabajos);
+            float resultado = JobTimeCalculator.GetTotalProcessTime(secuenciaTrabajos);
 
             Assert.AreEqual(28, resultado);
         }
@@ -37,7 +37,7 @@ namespace PepinoTests
                 new Job() { Nombre = "E", ProcessTime = 6 }
             };
 
-            int resultado = JobTimeCalculator.GetTotalProcessTime(secuenciaTrabajos);
+            float resultado = JobTimeCalculator.GetTotalProcessTime(secuenciaTrabajos);
 
             Assert.AreEqual(27, resultado);
         }
@@ -46,7 +46,7 @@ namespace PepinoTests
         [ExpectedException(typeof(ArgumentNullException))]
         public void GetTotalProcessTime_WhenArgumentIsNull()
         {
-            int resultado = JobTimeCalculator.GetTotalProcessTime(null);
+            float resultado = JobTimeCalculator.GetTotalProcessTime(null);
         }
     }
 }
