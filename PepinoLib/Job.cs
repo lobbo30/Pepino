@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace PepinoLib
 {
+    public enum PriorityRule : byte
+    {
+        FCFS, SPT, EDD, LPT
+    }
+
     public class Job
     {
         public string Nombre { get; set; }
@@ -13,8 +18,8 @@ namespace PepinoLib
         /// Tiempo de realización (proceso) del trabajo.
         /// </summary>
         public float ProcessTime { get; set; }
-        //public int FechaEntregaSolicitada { get; set; }
-        ///// <summary>
+        public int FechaEntregaSolicitada { get; set; }
+        /// <summary>
         /// Retraso del trabajo.
         /// </summary>
         public float JobDelayTime { get; set; }

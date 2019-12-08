@@ -55,6 +55,7 @@
     <Compile Include="GetTiempoMedioFinalizacionTests.cs" />
     <Compile Include="GetUtilizacionTests.cs" />
     <Compile Include="GetNumeroMedioTrabajosSistemaTests.cs" />
+    <Compile Include="GetRetrasoMedioTrabajosTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

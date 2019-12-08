@@ -25,35 +25,56 @@ namespace PepinoLib
             return total;
         }
 
-        public static float GetNumeroMedioTrabajosSistema(ICollection<Job> secuenciaTrabajos)
+        public static float GetNumeroMedioTrabajosSistema(ICollection<Job> jobSequence)
         {
             float tiempoRealizacionProceso, sumaTiemposFlujo;
-            CalculateTotalTimes(secuenciaTrabajos, out tiempoRealizacionProceso, out sumaTiemposFlujo);
+            CalculateTotalTimes(jobSequence, out tiempoRealizacionProceso, out sumaTiemposFlujo);
             return sumaTiemposFlujo / tiempoRealizacionProceso;
         }
 
-        private static void CalculateTotalTimes(ICollection<Job> secuenciaTrabajos, out float tiempoRealizacionProceso, out float sumaTiemposFlujo)
+        public static float GetRetrasoMedioTrabajos(ICollection<Job> jobSequence)
         {
-            if (secuenciaTrabajos == null)
+            float totalDiasRetraso = jobSequence.Sum(j => j.JobDelayTime);
+            int numeroTrabajos = jobSequence.Count;
+            return totalDiasRetraso / numeroTrabajos;
+        }
+
+        private static void CalculateTotalTimes(ICollection<Job> jobSequence, out float tiempoRealizacionProceso, out float sumaTiemposFlujo)
+        {
+            if (jobSequence == null)
             {
                 throw new ArgumentNullException();
             }
-            tiempoRealizacionProceso = GetTotalProcessTime(secuenciaTrabajos);
-            sumaTiemposFlujo = GetTotalFlowTime(secuenciaTrabajos);
+            tiempoRealizacionProceso = GetTotalProcessTime(jobSequence);
+            sumaTiemposFlujo = GetTotalFlowTime(jobSequence);
         }
 
-        public static float GetUtilizacion(ICollection<Job> secuenciaTrabajos)
+        public static float GetUtilizacion(ICollection<Job> jobSequence)
         {
             float tiempoRealizacionProceso, sumaTiemposFlujo;
-            CalculateTotalTimes(secuenciaTrabajos, out tiempoRealizacionProceso, out sumaTiemposFlujo);
+            CalculateTotalTimes(jobSequence, out tiempoRealizacionProceso, out sumaTiemposFlujo);
             return tiempoRealizacionProceso / sumaTiemposFlujo;
         }
 
-        public static float GetTiempoMedioFinalizacion(ICollection<Job> jobSequence)
+        public static float GetTiempoMedioFinalizacion(ICollection<Job> jobSequence, PriorityRule priorityRule = PriorityRule.FCFS)
+        {
+            if (priorityRule == PriorityRule.SPT)
+            {
+                return GetTiempoMedioFinalizacion(jobSequence.OrderBy(j => j.ProcessTime).ToList());
+            }
+            //else if (priorityRule == PriorityRule.EDD)
+            //{
+            //    return GetTiempoMedioFinalizacion(jobSequence.OrderBy(j => j.FechaEntregaSolicitada).ToList());
+            //}
+            return GetTiempoMedioFinalizacion(jobSequence);
+        }
+
+        private static float GetTiempoMedioFinalizacion(ICollection<Job> jobSequence)
         {
             float sumaTiemposFlujo = GetTotalFlowTime(jobSequence);
             int numeroTrabajos = jobSequence.Count;
             return sumaTiemposFlujo / numeroTrabajos;
         }
+
     }
 }
